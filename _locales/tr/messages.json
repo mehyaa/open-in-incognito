@@ -1,0 +1,34 @@
+{
+    "ext_name": {
+        "message": "Gizli Pencerede Aç",
+        "description": "Extension name."
+    },
+    "ext_description": {
+        "message": "Araç çubuğu düğmesi, içerik menüsü veya klavye kısayolu aracılığıyla etkin sekmeyi veya bir bağlantıyı gizli pencerede açın.",
+        "description": "Extension description."
+    },
+    "unsupported_target": {
+        "message": "'target' değeri geçersiz!",
+        "description": "Message if the target is unsuppoerted."
+    },
+    "action_open_tab_in_incognito": {
+        "message": "Sekmeyi Gizli Pencerede Aç",
+        "description": "Action message for open tab in incognito."
+    },
+    "command_open_page_in_incognito": {
+        "message": "Sekmeyi Gizli Pencerede Aç",
+        "description": "Command message for open tab in incognito."
+    },
+    "context_menu_open_page_in_incognito": {
+        "message": "Sayfayı Gizli Pencerede Aç",
+        "description": "Context menu message for open page in incognito."
+    },
+    "context_menu_open_link_in_incognito": {
+        "message": "Bağlantıyı Gizli Pencerede Aç",
+        "description": "Context menu message for open link in incognito."
+    },
+    "context_menu_open_selection_in_incognito": {
+        "message": "%s Gizli Pencerede Aç",
+        "description": "Context menu message for open selection in incognito."
+    }
+}

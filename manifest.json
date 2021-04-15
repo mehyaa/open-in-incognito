@@ -1,0 +1,43 @@
+{
+    "manifest_version": 3,
+    "name": "__MSG_ext_name__",
+    "description": "__MSG_ext_description__",
+    "version": "1.0.0",
+    "default_locale": "en",
+    "incognito": "not_allowed",
+    "permissions": [
+        "contextMenus",
+        "activeTab",
+        "tabs"
+    ],
+    "action": {
+        "default_title": "__MSG_action_open_tab_in_incognito__",
+        "default_icon": {
+            "16": "/images/icon_16px.png",
+            "32": "/images/icon_32px.png",
+            "48": "/images/icon_48px.png",
+            "64": "/images/icon_64px.png",
+            "128": "/images/icon_128px.png"
+        }
+    },
+    "icons": {
+        "16": "/images/icon_16px.png",
+        "32": "/images/icon_32px.png",
+        "48": "/images/icon_48px.png",
+        "64": "/images/icon_64px.png",
+        "128": "/images/icon_128px.png"
+    },
+    "commands": {
+        "incognito": {
+            "description": "__MSG_command_open_page_in_incognito__",
+            "suggested_key": {
+                "default": "Ctrl+Shift+I",
+                "mac": "MacCtrl+Shift+I",
+                "windows": "Ctrl+Shift+I"
+            }
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "ext_name": {
+        "message": "Open in Incognito",
+        "description": "Extension name."
+    },
+    "ext_description": {
+        "message": "Open the active tab or a link in a incognito window via toolbar button, context-menu or keyboard shortcut.",
+        "description": "Extension description."
+    },
+    "unsupported_target": {
+        "message": "Unsupported target!",
+        "description": "Message if the target is unsuppoerted."
+    },
+    "action_open_tab_in_incognito": {
+        "message": "Open Tab in Incognito",
+        "description": "Action message for open tab in incognito."
+    },
+    "command_open_page_in_incognito": {
+        "message": "Open Tab in Incognito",
+        "description": "Command message for open tab in incognito."
+    },
+    "context_menu_open_page_in_incognito": {
+        "message": "Open Page in Incognito",
+        "description": "Context menu message for open page in incognito."
+    },
+    "context_menu_open_link_in_incognito": {
+        "message": "Open Link in Incognito",
+        "description": "Context menu message for open link in incognito."
+    },
+    "context_menu_open_selection_in_incognito": {
+        "message": "Open %s in Incognito",
+        "description": "Context menu message for open selection in incognito."
+    }
+}
