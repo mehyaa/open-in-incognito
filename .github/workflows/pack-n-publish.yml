@@ -25,14 +25,13 @@ jobs:
           node-version: 14
 
       - name: Pack extension files
-        run: yarn run pack
+        run: yarn run pack ${{ env.PACKAGE_PATH }}
 
       - name: Upload & publish extension zip
-        uses: Klemensas/chrome-extension-upload-action@$VERSION
+        uses: mnao305/chrome-extension-upload@1.1.1
         with:
-          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          extension-id: ${{ env.EXTENSION_ID }}
+          file-path: ${{ env.PACKAGE_PATH }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
-          file-name: ${{ env.PACKAGE_PATH }}
-          app-id: ${{ env.EXTENSION_ID }}
-          publish: true
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
