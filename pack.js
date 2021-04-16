@@ -20,12 +20,19 @@ zip.addFile('background.js', Buffer.from(compressedBackground.code, 'utf8'));
 zip.addLocalFolder(path.resolve(__dirname, 'src', '_locales'), '_locales');
 zip.addLocalFolder(path.resolve(__dirname, 'src', 'images'), 'images');
 
-const destinationPath = path.resolve(__dirname, 'dist');
+const targetPath =
+    process.argv[2]
+        ? path.resolve(__dirname, process.argv[2])
+        : path.resolve(__dirname, 'dist', 'ext.zip');
 
-if (fs.existsSync(destinationPath)) {
-    fs.rmdirSync(destinationPath, { recursive: true });
+const targetDir = path.dirname(targetPath);
+
+if (!fs.existsSync(targetDir)) {
+    fs.mkdirSync(targetDir, { recursive: true });
 }
 
-fs.mkdirSync(destinationPath);
+if (fs.existsSync(targetPath)) {
+    fs.rmSync(targetPath);
+}
 
-zip.writeZip(path.join(destinationPath, 'ext.zip'));
+zip.writeZip(targetPath);
