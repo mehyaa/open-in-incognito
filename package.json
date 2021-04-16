@@ -1,0 +1,16 @@
+{
+  "name": "open-in-incognito",
+  "description": "Open the active tab or a link in a incognito window via toolbar button, context-menu or keyboard shortcut.",
+  "version": "1.0.0",
+  "repository": "https://github.com/mehyaa/open-in-incognito.git",
+  "author": "mehyaa <mehyaa@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "pack": "node pack.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.5",
+    "uglify-js": "^3.13.4"
+  }
+}
