@@ -1,3 +1,5 @@
+const menuItemPrefix = 'incognito_';
+
 function getTranslation(key, fallback) {
   // Due a Chrome bug chrome.i18n.getMessage is not available for Manifest V3
   // https://bugs.chromium.org/p/chromium/issues/detail?id=1159438
@@ -41,7 +43,7 @@ function createContextMenu(target, title) {
 
   chrome.contextMenus.create(
     {
-      id: `incognito_${target}`,
+      id: `${menuItemPrefix}${target}`,
       title: title,
       contexts: [target]
     },
@@ -68,15 +70,15 @@ chrome.runtime.onInstalled.addListener(() => {
     let url;
 
     switch (info.menuItemId) {
-      case 'incognito_page':
+      case `${menuItemPrefix}page`:
         url = info.pageUrl;
         break;
 
-      case 'incognito_link':
+      case `${menuItemPrefix}link`:
         url = info.linkUrl;
         break;
 
-      case 'incognito_selection':
+      case `${menuItemPrefix}selection`:
         const selection = info.selectionText && info.selectionText.trim();
 
         if (!selection) {
@@ -97,7 +99,9 @@ chrome.runtime.onInstalled.addListener(() => {
     openInIncognito(url);
   });
 
-  createContextMenu('page', getTranslation('context_menu_open_page_in_incognito', 'Open Page in Incognito'));
-  createContextMenu('link', getTranslation('context_menu_open_link_in_incognito', 'Open Link in Incognito'));
-  createContextMenu('selection', getTranslation('context_menu_open_selection_in_incognito', 'Open %s in Incognito'));
+  const contextMenuMessagePrefix = 'context_menu_open_';
+
+  createContextMenu('page', getTranslation(`${contextMenuMessagePrefix}page_in_incognito`, 'Open Page in Incognito'));
+  createContextMenu('link', getTranslation(`${contextMenuMessagePrefix}link_in_incognito`, 'Open Link in Incognito'));
+  createContextMenu('selection', getTranslation(`${contextMenuMessagePrefix}selection_in_incognito`, 'Open %s in Incognito'));
 });

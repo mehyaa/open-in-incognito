@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "default_locale": "en",
     "incognito": "not_allowed",
+    "homepage_url": "https://github.com/mehyaa/open-in-incognito",
     "permissions": [
         "contextMenus",
         "activeTab",
