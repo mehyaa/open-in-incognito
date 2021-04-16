@@ -1,0 +1,38 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Pack and Publish Chrome Extension
+
+on:
+  release:
+    types: [created]
+
+env:
+  EXTENSION_ID: hgbdhkeihmnagnajcdompejmafifhkhc
+  PACKAGE_PATH: './dist/ext.zip'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v2
+
+      - name: Prepare Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Pack extension files
+        run: yarn run pack
+
+      - name: Upload & publish extension zip
+        uses: Klemensas/chrome-extension-upload-action@$VERSION
+        with:
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          file-name: ${{ env.PACKAGE_PATH }}
+          app-id: ${{ env.EXTENSION_ID }}
+          publish: true
