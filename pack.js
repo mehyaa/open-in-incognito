@@ -1,38 +1,97 @@
-const fs = require('fs');
-const path = require('path');
+import {
+    existsSync,
+    mkdirSync,
+    readdirSync,
+    readFileSync,
+    rmSync,
+    statSync
+} from 'fs';
 
-const AdmZip = require('adm-zip');
-const UglifyJS = require('uglify-js');
+import {
+    dirname,
+    extname,
+    join,
+    relative,
+    resolve
+} from 'path';
 
-const zip = new AdmZip();
+import AdmZip from 'adm-zip';
+import { minify } from 'uglify-js';
 
-const manifestPath  = path.resolve(__dirname, 'src', 'manifest.json');
-const backgroundPath  = path.resolve(__dirname, 'src', 'background.js');
+function* gelAllFiles(rootPath) {
+    for (let file of readdirSync(rootPath)) {
+        const currentPath = join(rootPath, file);
 
-const manifestSource = fs.readFileSync(manifestPath, 'utf8');
-const backgroundSource = fs.readFileSync(backgroundPath, 'utf8');
+        if (statSync(currentPath).isDirectory()) {
+            for (let filePath of gelAllFiles(currentPath)) {
+                yield filePath;
+            }
+        }
+        else {
+            yield currentPath;
+        }
+    }
+}
 
-const compressedManifest = JSON.stringify(JSON.parse(manifestSource));
-const compressedBackground = UglifyJS.minify(backgroundSource, { v8: true, mangle: { toplevel: true } });
+function minifyJavaScript(source) {
+    const result =
+        minify(
+            source,
+            {
+                v8: true,
+                mangle: {
+                    toplevel: true
+                }
+            });
 
-zip.addFile('manifest.json', Buffer.from(compressedManifest, 'utf8'));
-zip.addFile('background.js', Buffer.from(compressedBackground.code, 'utf8'));
-zip.addLocalFolder(path.resolve(__dirname, 'src', '_locales'), '_locales');
-zip.addLocalFolder(path.resolve(__dirname, 'src', 'images'), 'images');
+    return result.code;
+}
+
+function minifyJson(source) {
+    return JSON.stringify(JSON.parse(source));
+}
+
+const sourceDirPath = resolve(resolve(), 'src');
 
 const targetPath =
     process.argv[2]
-        ? path.resolve(__dirname, process.argv[2])
-        : path.resolve(__dirname, 'dist', 'ext.zip');
+        ? resolve(resolve(), process.argv[2])
+        : resolve(resolve(), 'dist', 'ext.zip');
 
-const targetDir = path.dirname(targetPath);
+const targetDirPath = dirname(targetPath);
 
-if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
+const zip = new AdmZip();
+
+const encoding = 'utf8';
+
+try {
+    for (let filePath of gelAllFiles(sourceDirPath)) {
+        const relativePath = relative(sourceDirPath, filePath);
+
+        switch (extname(filePath)) {
+            case '.js':
+                zip.addFile(relativePath, Buffer.from(minifyJavaScript(readFileSync(filePath, encoding)), encoding));
+                break;
+
+            case '.json':
+                zip.addFile(relativePath, Buffer.from(minifyJson(readFileSync(filePath, encoding)), encoding));
+                break;
+        
+            default:
+                zip.addFile(relativePath, readFileSync(filePath));
+                break;
+        }
+    }
+
+    if (!existsSync(targetDirPath)) {
+        mkdirSync(targetDirPath, { recursive: true });
+    }
+
+    if (existsSync(targetPath)) {
+        rmSync(targetPath);
+    }
+
+    zip.writeZip(targetPath);
+} catch (err) {
+    console.error(err);
 }
-
-if (fs.existsSync(targetPath)) {
-    fs.rmSync(targetPath);
-}
-
-zip.writeZip(targetPath);

@@ -6,6 +6,7 @@
   "author": "mehyaa <mehyaa@gmail.com>",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "pack": "node pack.js"
   },
