@@ -5,7 +5,8 @@ name: Pack and Publish Chrome Extension
 
 on:
   release:
-    types: [created]
+    types: [published, created, edited]
+  workflow_dispatch:
 
 env:
   EXTENSION_ID: hgbdhkeihmnagnajcdompejmafifhkhc
