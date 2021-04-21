@@ -5,7 +5,8 @@ name: Pack and Publish Chrome Extension
 
 on:
   release:
-    types: [created]
+    types: [published, created, edited]
+  workflow_dispatch:
 
 env:
   EXTENSION_ID: hgbdhkeihmnagnajcdompejmafifhkhc
@@ -23,6 +24,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
+
+      - name: Install Node Modules
+        run: yarn install
 
       - name: Pack extension files
         run: yarn run pack ${{ env.PACKAGE_PATH }}
