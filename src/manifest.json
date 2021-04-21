@@ -14,19 +14,19 @@
     "action": {
         "default_title": "__MSG_action_open_tab_in_incognito__",
         "default_icon": {
-            "16": "/images/icon/16px.png",
-            "32": "/images/icon/32px.png",
-            "48": "/images/icon/48px.png",
-            "64": "/images/icon/64px.png",
-            "128": "/images/icon/128px.png"
+            "16": "/images/icons/16px.png",
+            "32": "/images/icons/32px.png",
+            "48": "/images/icons/48px.png",
+            "64": "/images/icons/64px.png",
+            "128": "/images/icons/128px.png"
         }
     },
     "icons": {
-        "16": "/images/icon/16px.png",
-        "32": "/images/icon/32px.png",
-        "48": "/images/icon/48px.png",
-        "64": "/images/icon/64px.png",
-        "128": "/images/icon/128px.png"
+        "16": "/images/icons/16px.png",
+        "32": "/images/icons/32px.png",
+        "48": "/images/icons/48px.png",
+        "64": "/images/icons/64px.png",
+        "128": "/images/icons/128px.png"
     },
     "commands": {
         "incognito": {
