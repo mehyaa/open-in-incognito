@@ -7,10 +7,6 @@
         "message": "Araç çubuğu düğmesi, içerik menüsü veya klavye kısayolu aracılığıyla etkin sekmeyi veya bir bağlantıyı gizli pencerede açın.",
         "description": "Extension description."
     },
-    "unsupported_target": {
-        "message": "'target' değeri geçersiz!",
-        "description": "Message if the target is unsuppoerted."
-    },
     "action_open_tab_in_incognito": {
         "message": "Sekmeyi Gizli Pencerede Aç",
         "description": "Action message for open tab in incognito."

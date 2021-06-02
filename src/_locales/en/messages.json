@@ -7,10 +7,6 @@
         "message": "Open the active tab or a link in a incognito window via toolbar button, context-menu or keyboard shortcut.",
         "description": "Extension description."
     },
-    "unsupported_target": {
-        "message": "Unsupported target!",
-        "description": "Message if the target is unsuppoerted."
-    },
     "action_open_tab_in_incognito": {
         "message": "Open Tab in Incognito",
         "description": "Action message for open tab in incognito."
